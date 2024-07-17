@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+    اذ بترجع فقط صف واحد استخدم مودل برودكت لحاله اما اذ بترجع اكثر من صف كانه دكشنري استخدم IEnumerable
+*@
+@model Product
+
+@{
+}
+<div class="cont">
+
+    <div class="row">
+
+        <div class="col">
+            <form asp-action="Update" method="post">
+                <input type="hidden" asp-for="Id" class="form-control" />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">اسم المنتج</label>
+                        <input type="text" asp-for="Name" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">وصف  المنتج</label>
+                        <input type="text" asp-for="Description" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Description"></span>
+                    </div>
+
+                </div>
+                <div class="row mt-4">
+                    <div class="col text-center">
+                        <button class="btn btn-success">حفظ</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

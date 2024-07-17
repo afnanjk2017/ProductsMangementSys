@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Product
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="alert alert-success text-center">إنشاء منتج جديد </h3>
+                        <form asp-action="Create" method="get">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="" class="form-label">اسم المنتج</label>
+                                    <input type="text" asp-for="Name" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Name"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="" class="form-label">وصف  المنتج</label>
+                                    <input type="text" asp-for="Description" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Description"></span>
+                                </div>
+
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col text-center">
+                                    <button class="btn btn-success">حفظ</button>
+                                </div>
+                            </div>
+                        </form>
+                        @if(TempData["add"] != null)
+                        {
+                            if(TempData["add"].ToString()=="True")
+                            {
+                                 <h1> added </h1>
+                            }
+                            else
+                            {
+                                <h1>wrong</h1>
+                            }
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-body">
+                <table class="table  table-bordered text-center table-success">
+                    <thead>
+                        <tr>
+                        <th>
+                            رقم المنتج
+                        </th>
+                        <th>
+                            اسم المنتج
+                        </th>
+                        <th>
+                            وصف المنتج
+                            </th>
+                            <th colspan="2">
+                              اجراء
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var items in ViewBag.Product)
+                        {
+                            
+                            <tr>
+                                <td> @items.Id </td>
+                                <td> @items.Name </td>
+                                <td> @items.Description </td>
+                                <td><a asp-action="Delete" asp-route-product="@items.Id"> <i class="bi bi-archive-fill "></i> </a></td>
+                                <td><a asp-action="Edit" asp-route-product="@items.Id"><i class=" bi bi-pencil-fill"></i> </a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col">
+                        @if (TempData["del"] != null && Convert.ToBoolean(TempData["del"]))
+                        {
+                            <h1> deleted </h1>
+                        }
+                        else
+                        {
+                            <h1>not deleted</h1>
+                        }
+
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
+</div>
