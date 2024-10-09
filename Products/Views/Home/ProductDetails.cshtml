@@ -1,0 +1,104 @@
+﻿
+@model IEnumerable<ProductDetails>
+
+<div class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="alert alert-success text-center">انشاء تفاصيل المنتجات  </h3>
+                        <form asp-action="CreateDetails" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="productSelect" class="form-label">اسم المنتج </label>
+                                    <select class="form-select" id="productSelect" asp-for="First().Products_Id">
+                                    @foreach (var items in ViewBag.Products)
+                                    {
+                                        <option value="@items.Id"  > @items.Name</option>
+                                    
+                                    }
+                                    </select>
+                                   
+
+                                    <label for="s" class="form-label">كميه المنتج</label>
+                                    <input type="number" asp-for="First().Qty" class="form-control" id="s" />
+                                    <span class="text-danger" asp-validation-for="First().Qty"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="productDescription" class="form-label">سعر المنتج</label>
+                                    <input type="number" asp-for="First().Price" class="form-control" id="productDescription" />
+                                    <span class="text-danger" asp-validation-for="First().Price"></span>
+                                    <label for="a" class="form-label">لون المنتج</label>
+                                    <input type="text" asp-for="First().Color" class="form-control" id="a" />
+                                    <span class="text-danger" asp-validation-for="First().Color"></span>
+
+                                    <label for="" class="form-label">صورة المنتج </label>
+                                    <input type="file" class="form-control" name="Images" accept="images/*" />
+                                    <span class="text-danger" asp-validation-for="First().Images"></span>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col text-center">
+                                    <button type="submit" class="btn btn-success">حفظ</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+
+                    <div class="card-body">
+                        <table class="table  table-bordered text-center ">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>
+                                        رقم تفاصيل المنتج
+                                    </th>
+                                    <th>
+                                        اسم المنتج
+                                    </th>
+                                    <th>
+                                        سعر المنتج
+                                    </th>
+                                    <th>
+                                        لون المنتج
+                                    </th>
+                                    <th>
+                                        كميه المنتج
+                                    </th>
+                                    <th>
+                                        صورة المنتج
+                                    </th>
+                                    <th colspan="2">
+                                        اجراء
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var items in ViewBag.ProductD)
+                                {
+
+                                    <tr>
+                                        <td> @items.id </td>
+                                        <td> @items.name </td>
+                                        <td> @items.price </td>
+                                        <td> @items.color </td>
+                                        <td> @items.qty </td>
+                                        <td><img src="~/img/@items.images" width="100" height="100"/> </td>
+                                        <td><a asp-action="DeleteD" asp-route-product="@items.id"> <i class="bi bi-archive-fill "></i> </a></td>
+                                        <td><a asp-action="EditD" asp-route-product="@items.id"><i class=" bi bi-pencil-fill"></i> </a></td>
+                                       
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                       
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,9 +4,63 @@
 
 @model Product
 
+<div class="modal" tabindex="-1" id="update">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">تأكيد  تعديل  </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Update" method="post">
+                    <input type="hidden" id="Id" name="Id" class="form-control" />
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="" class="form-label">اسم المنتج</label>
+                            <input type="text" id="Name" name="Name" class="form-control" />
+                           
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="" class="form-label">وصف  المنتج</label>
+                            <input type="text" id="Description" name="Description" class="form-control" />
+                          
+                        </div>
+
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col text-center">
+                            <button class="btn btn-success">حفظ</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+           
+
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="conform">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">تأكيد </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>هل ترعب في تأكيد الحذف.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا</button>
+                <button type="button" onclick="confirm()" data-bs-dismiss="modal" class="btn btn-primary">نعم</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+  
 
     <div class="container">
         <div class="row">
@@ -38,11 +92,11 @@
                         {
                             if(TempData["add"].ToString()=="True")
                             {
-                                 <h1> added </h1>
+                                 <h1> تمت الاضافة </h1>
                             }
                             else
                             {
-                                <h1>wrong</h1>
+                                <h1>حدث خطأ</h1>
                             }
                         }
                         
@@ -55,8 +109,8 @@
         <div class="card">
 
             <div class="card-body">
-                <table class="table  table-bordered text-center table-success">
-                    <thead>
+                <table class="table  table-bordered text-center">
+                    <thead class="table-info">
                         <tr>
                         <th>
                             رقم المنتج
@@ -81,8 +135,12 @@
                                 <td> @items.Id </td>
                                 <td> @items.Name </td>
                                 <td> @items.Description </td>
-                                <td><a asp-action="Delete" asp-route-product="@items.Id"> <i class="bi bi-archive-fill "></i> </a></td>
-                                <td><a asp-action="Edit" asp-route-product="@items.Id"><i class=" bi bi-pencil-fill"></i> </a></td>
+                              @*   <td><a asp-action="Delete" asp-route-product="@items.Id"> <i class="bi bi-archive-fill "></i> </a></td>
+                                <td><a asp-action="Edit" asp-route-product="@items.Id"><i class=" bi bi-pencil-fill"></i> </a></td> *@
+
+                                <td><a onclick='delMassage(@items.Id)'> <i class="bi bi-archive-fill "></i> </a></td>
+                                <td><a onclick='update1(@items.Id)'> <i class="bi bi-pencil-fill "></i> </a></td>
+                              
                             </tr>
                         }
                     </tbody>
@@ -91,11 +149,11 @@
                     <div class="col">
                         @if (TempData["del"] != null && Convert.ToBoolean(TempData["del"]))
                         {
-                            <h1> deleted </h1>
+                            <h3> تم الحذف </h3>
                         }
                         else
                         {
-                            <h1>not deleted</h1>
+                            <h3> لم يتم الحذف</h3>
                         }
 
                     </div>

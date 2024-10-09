@@ -1,0 +1,67 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    <input type="text" disabled value="@ViewData["name"]" class="form-control" />
+*@
+@{
+
+   
+}
+@model ProductDetails
+
+
+<div class="cont">
+
+    <div class="row">
+
+        <div class="col">
+            <form asp-action="UpdateD" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" class="form-control" />
+                <div class="row">
+                    <div class="col-sm-6">
+                        
+                        
+
+                        <label for="productSelect" class="form-label">اسم المنتج</label>
+                        <select class="form-select" id="productSelect" asp-for="Products_Id">
+                            @foreach (var items in ViewBag.Products)
+                            {
+                                <option value="@items.Id"> @items.Name</option>
+
+                            }
+                        </select>
+
+
+
+                        <label for="s" class="form-label">كميه المنتج</label>
+                        <input type="number" asp-for="Qty" class="form-control" id="s" />
+                        <span class="text-danger" asp-validation-for="Qty"></span>
+                       
+                    </div>
+
+                
+                
+                   <div class="col-sm-6">
+                    <label for="productDescription" class="form-label">سعر المنتج</label>
+                    <input type="number" asp-for="Price" class="form-control" id="productDescription" />
+                    <span class="text-danger" asp-validation-for="Price"></span>
+
+                    <label for="a" class="form-label">لون المنتج</label>
+                    <input type="text" asp-for="Color" class="form-control" id="a" />
+                    <span class="text-danger" asp-validation-for="Color"></span>
+
+                    <label for="" class="form-label">صوة المنتج </label>
+                    <input type="file" class="form-control" name="Images" accept="images/*" />
+                    <span class="text-danger" asp-validation-for="Images"></span>
+
+                   </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-success">حفظ</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

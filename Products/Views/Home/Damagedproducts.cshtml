@@ -1,0 +1,92 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Damagedproducts
+
+<div class="text-center">
+   
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="alert alert-success text-center">إنشاء منتج تالف </h3>
+                        <form asp-action="CreateDamage" method="get">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="productSelect" class="form-label">اسم المنتج </label>
+                                    <select class="form-select" id="productSelect" asp-for="Products_Id">
+                                        @foreach (var items in ViewBag.Product)
+                                        {
+                                            <option value="@items.Id"> @items.Name</option>
+
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="s" class="form-label"> كميه المنتج</label>
+                                    <input type="number" asp-for="Qty" class="form-control" id="s" />
+                                    <span class="text-danger" asp-validation-for="Qty"></span>
+                                </div>
+
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col text-center">
+                                    <button class="btn btn-success">حفظ</button>
+                                </div>
+                            </div>
+                        </form>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-body">
+                <table class="table  table-bordered text-center">
+                    <thead class=" table-success">
+                        <tr>
+                            <th>
+                                رقم التلف
+                            </th>
+                            <th>
+                                اسم المنتج
+                            </th>
+                            <th>
+                                لون المنتج
+                            </th>
+                            <th>
+                                كميه المنتج
+                            </th>
+                           
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var items in ViewBag.ProductD)
+                        {
+
+                            <tr>
+                                <td> @items.id </td>
+                                <td> @items.name </td>
+                                <td> @items.color </td>
+                                <td> @items.qty </td>
+                              
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+               
+
+            </div>
+        </div>
+    </div>
+
+</div>

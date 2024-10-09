@@ -14,6 +14,7 @@ namespace Products.Data
         // Define your DbSets (tables) here
         public DbSet<Product> Product { get; set; }
         public DbSet<ProductDetails> ProductDetails { get; set; }
+        public DbSet<Damagedproducts> Damagedproducts { get; set; }
 
 
 
